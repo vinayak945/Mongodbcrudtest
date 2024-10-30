@@ -13,7 +13,7 @@ server.use(express.static('build'))
 // MongoDB connection
 async function database() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/students");
+    await mongoose.connect("mongodb+srv://vinayak92010:vinayak92010@cluster0.oztcu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
     console.log("Connected to MongoDB successfully.");
   } catch (error) {
     console.error("Failed to connect to MongoDB", error);
