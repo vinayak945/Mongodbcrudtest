@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const { name } = require("ejs");
 
 const server = express();
 const port = 8080;
@@ -33,12 +34,23 @@ const studentSchema = new Schema({
     default:0
   },
 });
-
+const userSchema = new Schema({
+  name:String,
+  email:String,
+  password:String
+})
 const Product = mongoose.model("Product", studentSchema);
+const User = mongoose.model("User" , userSchema)
 
-// Routes
-
-// Create a new product
+server.post('/user' , async(req , res)=>{
+  const newuser = new User({
+    name : req.body.name,
+    email : req.body.email,
+    password : req.body.password
+  })
+  await newuser.save()
+  res.json(newuser)
+})
 server.post("/create", async (req, res) => {
   try {
     const pro = new Product({
